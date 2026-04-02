@@ -1,0 +1,32 @@
+/* ===== Reset & Base ===== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-primary: #545f71;
+  --color-secondary: #9ba5b7;
+  --color-tertiary: #eef1f4;
+  --color-white: #ffffff;
+  --font-family: 'Inter', 'Noto Sans KR', sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--color-primary);
+  background: var(--color-white);
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}

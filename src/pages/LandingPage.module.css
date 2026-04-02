@@ -1,0 +1,171 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  display: flex;
+  flex: 1;
+}
+
+.left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--color-secondary);
+  padding: 40px;
+}
+
+.placeholder {
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1;
+  border: 3px solid var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-white);
+}
+
+.placeholder svg {
+  width: 32px;
+  height: 32px;
+  color: var(--color-secondary);
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 80px;
+}
+
+.subtitle {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.48px;
+  line-height: 30px;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -0.96px;
+  line-height: 58px;
+  margin-bottom: 30px;
+}
+
+.description {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.64px;
+  line-height: 42px;
+  margin-bottom: 50px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 594px;
+  margin-bottom: 30px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60px;
+  border: 2px solid var(--color-primary);
+  border-radius: 6px;
+  font-family: var(--font-family);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.48px;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btnFilled {
+  background: var(--color-tertiary);
+}
+
+.btn:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 594px;
+  margin-bottom: 30px;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.2px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-primary);
+}
+
+.socialIcons {
+  display: flex;
+  gap: 24px;
+  max-width: 594px;
+  justify-content: center;
+}
+
+.socialIcon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  overflow: hidden;
+}
+
+.socialIcon:hover {
+  transform: scale(1.08);
+}
+
+.socialIcon svg {
+  width: 36px;
+  height: 36px;
+}
+
+.google {
+  background: var(--color-white);
+  border: 2px solid #e5e7eb;
+}
+
+.kakao {
+  background: #fee500;
+}
+
+.naver {
+  background: #03c75a;
+}
+
+.discord {
+  background: #5865f2;
+}
+
+.footer {
+  height: 124px;
+  border-top: 2px solid var(--color-primary);
+}

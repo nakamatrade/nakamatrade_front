@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp -r \"C:/Developer/nakama-temp/\"* \"C:/Developer/NakamaTrade/\")",
+      "Bash(cp \"C:/Developer/nakama-temp/.gitignore\" \"C:/Developer/NakamaTrade/\")",
+      "Bash(rm -rf \"C:/Developer/nakama-temp\")"
+    ]
+  }
+}
