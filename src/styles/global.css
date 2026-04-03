@@ -8,17 +8,24 @@
 }
 
 :root {
-  --color-primary: #545f71;
-  --color-secondary: #9ba5b7;
-  --color-tertiary: #eef1f4;
+  --color-dark: #0a1a14;
+  --color-primary: #1d9e75;
+  --color-primary-hover: #178a66;
+  --color-light: #5dcaa5;
+  --color-accent: #ef9f27;
+  --color-accent-hover: #d88d1f;
+  --color-surface: #e1f5ee;
   --color-white: #ffffff;
+  --color-text: #0a1a14;
+  --color-text-muted: #4a6358;
+  --color-border: #c0ddd2;
   --font-family: 'Inter', 'Noto Sans KR', sans-serif;
 }
 
 body {
   font-family: var(--font-family);
-  color: var(--color-primary);
-  background: var(--color-white);
+  color: var(--color-text);
+  background: var(--color-surface);
   min-height: 100vh;
 }
 

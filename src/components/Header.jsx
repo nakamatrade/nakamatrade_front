@@ -5,7 +5,7 @@ export default function Header({ navItems = [] }) {
   return (
     <header className={styles.header}>
       <Link to="/" className={styles.logo}>
-        NakamaTrade
+        Nakama<span>Trade</span>
       </Link>
       <nav className={styles.nav}>
         {navItems.map((item) => (
