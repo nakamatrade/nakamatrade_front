@@ -1,39 +1,88 @@
-/* ===== Reset & Base ===== */
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* 페이지 루트 레이아웃 */
+  .page-root {
+    @apply min-h-screen flex flex-col bg-background;
+  }
+
+  /* 폼 필드 래퍼 */
+  .form-field {
+    @apply flex flex-col gap-1.5;
+  }
+
+  /* 폼 인라인 피드백 (성공/에러) */
+  .field-feedback {
+    @apply flex items-center gap-1.5 text-sm;
+  }
+  .field-feedback-success {
+    @apply field-feedback text-brand-primary;
+  }
+
+  /* 소셜 로그인 버튼 기본 형태 */
+  .social-btn {
+    @apply w-11 h-11 rounded-full flex items-center justify-center transition-colors shadow-sm;
+  }
 }
 
-:root {
-  --color-dark: #0a1a14;
-  --color-primary: #1d9e75;
-  --color-primary-hover: #178a66;
-  --color-light: #5dcaa5;
-  --color-accent: #ef9f27;
-  --color-accent-hover: #d88d1f;
-  --color-surface: #e1f5ee;
-  --color-white: #ffffff;
-  --color-text: #0a1a14;
-  --color-text-muted: #4a6358;
-  --color-border: #c0ddd2;
-  --font-family: 'Inter', 'Noto Sans KR', sans-serif;
+@layer base {
+  :root {
+    /* 배경: #e1f5ee (연한 민트) */
+    --background: 159 50% 92%;
+    --foreground: 157 45% 7%;
+
+    /* 카드: 흰색 */
+    --card: 0 0% 100%;
+    --card-foreground: 157 45% 7%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 157 45% 7%;
+
+    /* 프라이머리: #1d9e75 (틸 그린) */
+    --primary: 161 69% 37%;
+    --primary-foreground: 0 0% 100%;
+
+    /* 세컨더리 */
+    --secondary: 159 35% 85%;
+    --secondary-foreground: 157 45% 7%;
+
+    /* 뮤트 */
+    --muted: 157 20% 88%;
+    --muted-foreground: 154 15% 34%;
+
+    /* 어센트: #ef9f27 (오렌지) */
+    --accent: 36 86% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* 보더: #c0ddd2 */
+    --border: 157 30% 81%;
+    --input: 157 30% 81%;
+    --ring: 161 69% 37%;
+
+    --radius: 0.5rem;
+  }
 }
 
-body {
-  font-family: var(--font-family);
-  color: var(--color-text);
-  background: var(--color-surface);
-  min-height: 100vh;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-ul {
-  list-style: none;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
 }

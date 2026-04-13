@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import { CheckCircle } from 'lucide-react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import styles from './SignupPage.module.css';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 const navItems = [
   { label: '경매방 생성', to: '#' },
@@ -47,99 +50,96 @@ export default function SignupPage() {
   };
 
   return (
-    <div className={styles.page}>
+    <div className="page-root">
       <Header navItems={navItems} />
 
-      <div className={styles.layout}>
+      <div className="flex flex-1">
         <Sidebar activeItem="Home" />
 
-        <main className={styles.main}>
-          <form className={styles.form} onSubmit={handleSubmit}>
+        <main className="flex-1 flex items-center justify-center p-12">
+          <form
+            className="w-full max-w-sm flex flex-col gap-5"
+            onSubmit={handleSubmit}
+          >
             {/* ID */}
-            <div className={styles.formGroup}>
-              <label className={styles.label} htmlFor="userId">ID</label>
-              <div className={styles.row}>
-                <input
-                  className={styles.input}
+            <div className="form-field">
+              <Label htmlFor="userId">ID</Label>
+              <div className="flex gap-2">
+                <Input
                   type="text"
                   id="userId"
                   name="userId"
-                  placeholder="Input text"
+                  placeholder="아이디 입력"
                   value={form.userId}
                   onChange={handleChange}
                 />
-                <button
+                <Button
                   type="button"
-                  className={styles.btnSmall}
+                  variant="outline"
+                  size="sm"
+                  className="shrink-0 h-11"
                   onClick={handleCheckDuplicate}
                 >
                   중복 확인
-                </button>
+                </Button>
               </div>
               {idChecked && (
-                <div className={styles.hint}>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+                <div className="field-feedback-success">
+                  <CheckCircle className="w-4 h-4" />
                   <span>사용 가능한 ID입니다</span>
                 </div>
               )}
             </div>
 
             {/* 비밀번호 */}
-            <div className={styles.formGroup}>
-              <label className={styles.label} htmlFor="password">비밀번호</label>
-              <input
-                className={styles.input}
+            <div className="form-field">
+              <Label htmlFor="password">비밀번호</Label>
+              <Input
                 type="password"
                 id="password"
                 name="password"
-                placeholder="Input text"
+                placeholder="비밀번호 입력"
                 value={form.password}
                 onChange={handleChange}
               />
             </div>
 
             {/* 비밀번호 확인 */}
-            <div className={styles.formGroup}>
-              <label className={styles.label} htmlFor="passwordConfirm">비밀번호확인</label>
-              <input
-                className={styles.input}
+            <div className="form-field">
+              <Label htmlFor="passwordConfirm">비밀번호 확인</Label>
+              <Input
                 type="password"
                 id="passwordConfirm"
                 name="passwordConfirm"
-                placeholder="Input text"
+                placeholder="비밀번호 재입력"
                 value={form.passwordConfirm}
                 onChange={handleChange}
               />
               {passwordMatch && (
-                <div className={styles.hint}>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+                <div className="field-feedback-success">
+                  <CheckCircle className="w-4 h-4" />
                   <span>Password 일치</span>
                 </div>
               )}
             </div>
 
             {/* 닉네임 */}
-            <div className={styles.formGroup}>
-              <label className={styles.label} htmlFor="nickname">닉네임</label>
-              <input
-                className={styles.input}
+            <div className="form-field">
+              <Label htmlFor="nickname">닉네임</Label>
+              <Input
                 type="text"
                 id="nickname"
                 name="nickname"
-                placeholder="Input text"
+                placeholder="닉네임 입력"
                 value={form.nickname}
                 onChange={handleChange}
               />
             </div>
 
             {/* 회원가입 버튼 */}
-            <button type="submit" className={styles.btnSubmit}>
+            <Button type="submit" className="mt-2 w-full">
               회원가입
-            </button>
+            </Button>
           </form>
         </main>
       </div>
