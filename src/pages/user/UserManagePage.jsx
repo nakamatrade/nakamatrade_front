@@ -1,44 +1,37 @@
 import { useState } from 'react';
 import { CheckCircle } from 'lucide-react';
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
+import Header from '@/components/Header';
+import Sidebar from '@/components/Sidebar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
 const navItems = [
   { label: '경매방 생성', to: '#' },
-  { label: '경매방 입장', to: '#', active: true },
+  { label: '경매방 입장', to: '#' },
   { label: '매물 관리', to: '#' },
-  { label: '사용자 관리', to: '#' },
+  { label: '사용자 관리', to: '/user-manage', active: true },
   { label: '이용 가이드', to: '#' },
 ];
 
-export default function SignupPage() {
+export default function UserManagePage() {
   const [form, setForm] = useState({
-    userId: '',
+    userId: 'nakama_user',   // 기존 사용자 ID (수정 불가)
+    email: '',
     password: '',
     passwordConfirm: '',
     nickname: '',
   });
-  const [idChecked, setIdChecked] = useState(false);
   const passwordMatch = form.passwordConfirm && form.password === form.passwordConfirm;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-    if (name === 'userId') setIdChecked(false);
-  };
-
-  const handleCheckDuplicate = () => {
-    if (form.userId.trim()) {
-      setIdChecked(true);
-    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.userId || !form.password || !form.passwordConfirm || !form.nickname) {
+    if (!form.email || !form.password || !form.passwordConfirm || !form.nickname) {
       alert('모든 필드를 입력해주세요.');
       return;
     }
@@ -46,7 +39,7 @@ export default function SignupPage() {
       alert('비밀번호가 일치하지 않습니다.');
       return;
     }
-    alert('회원가입이 완료되었습니다!');
+    alert('사용자 정보가 저장되었습니다!');
   };
 
   return (
@@ -61,34 +54,30 @@ export default function SignupPage() {
             className="w-full max-w-sm flex flex-col gap-5"
             onSubmit={handleSubmit}
           >
-            {/* ID */}
+            {/* ID — 수정 불가 */}
             <div className="form-field">
               <Label htmlFor="userId">ID</Label>
-              <div className="flex gap-2">
-                <Input
-                  type="text"
-                  id="userId"
-                  name="userId"
-                  placeholder="아이디 입력"
-                  value={form.userId}
-                  onChange={handleChange}
-                />
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  className="shrink-0 h-11"
-                  onClick={handleCheckDuplicate}
-                >
-                  중복 확인
-                </Button>
-              </div>
-              {idChecked && (
-                <div className="field-feedback-success">
-                  <CheckCircle className="w-4 h-4" />
-                  <span>사용 가능한 ID입니다</span>
-                </div>
-              )}
+              <Input
+                type="text"
+                id="userId"
+                name="userId"
+                value={form.userId}
+                disabled
+                className="bg-muted text-muted-foreground cursor-not-allowed"
+              />
+            </div>
+
+            {/* 이메일 */}
+            <div className="form-field">
+              <Label htmlFor="email">이메일</Label>
+              <Input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Input text"
+                value={form.email}
+                onChange={handleChange}
+              />
             </div>
 
             {/* 비밀번호 */}
@@ -98,7 +87,7 @@ export default function SignupPage() {
                 type="password"
                 id="password"
                 name="password"
-                placeholder="비밀번호 입력"
+                placeholder="Input text"
                 value={form.password}
                 onChange={handleChange}
               />
@@ -106,12 +95,12 @@ export default function SignupPage() {
 
             {/* 비밀번호 확인 */}
             <div className="form-field">
-              <Label htmlFor="passwordConfirm">비밀번호 확인</Label>
+              <Label htmlFor="passwordConfirm">비밀번호확인</Label>
               <Input
                 type="password"
                 id="passwordConfirm"
                 name="passwordConfirm"
-                placeholder="비밀번호 재입력"
+                placeholder="Input text"
                 value={form.passwordConfirm}
                 onChange={handleChange}
               />
@@ -130,15 +119,15 @@ export default function SignupPage() {
                 type="text"
                 id="nickname"
                 name="nickname"
-                placeholder="닉네임 입력"
+                placeholder="Input text"
                 value={form.nickname}
                 onChange={handleChange}
               />
             </div>
 
-            {/* 회원가입 버튼 */}
-            <Button type="submit" className="mt-2 w-full">
-              회원가입
+            {/* 저장 버튼 */}
+            <Button type="submit" variant="outline" className="mt-2 w-full">
+              저장
             </Button>
           </form>
         </main>

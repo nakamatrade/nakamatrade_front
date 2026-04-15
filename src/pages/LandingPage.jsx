@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ImageIcon } from 'lucide-react';
-import Header from '../components/Header';
+import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
