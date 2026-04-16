@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 const navItems = [
   { label: '트레이드 시작', to: '/', active: true },
   { label: '이용 가이드', to: '#' },
-  { label: '공지사항', to: '#' },
+  { label: '공지사항', to: '/notice' },
 ];
 
 const socialButtons = [

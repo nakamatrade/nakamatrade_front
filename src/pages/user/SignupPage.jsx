@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 const navItems = [
   { label: '경매방 생성', to: '#' },
   { label: '경매방 입장', to: '#', active: true },
-  { label: '매물 관리', to: '#' },
+  { label: '매물 관리', to: '/product-manage' },
   { label: '사용자 관리', to: '/user-manage' },
   { label: '이용 가이드', to: '#' },
 ];
