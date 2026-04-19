@@ -3,7 +3,7 @@ import { ImageIcon } from 'lucide-react';
 import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { cn } from '@/lib/utils';
+import SocialButton from '@/components/common/SocialButton';
 
 const navItems = [
   { label: '트레이드 시작', to: '/', active: true },
@@ -53,14 +53,6 @@ const socialButtons = [
   },
 ];
 
-function SocialBtn({ label, className, svg }) {
-  return (
-    <button aria-label={label} className={cn('social-btn', className)}>
-      {svg}
-    </button>
-  );
-}
-
 export default function LandingPage() {
   return (
     <div className="page-root">
@@ -105,7 +97,7 @@ export default function LandingPage() {
 
           <div className="flex gap-3">
             {socialButtons.map((btn) => (
-              <SocialBtn key={btn.label} {...btn} />
+              <SocialButton key={btn.label} {...btn} />
             ))}
           </div>
         </div>
