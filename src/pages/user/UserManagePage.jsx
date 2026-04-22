@@ -24,7 +24,12 @@ export default function UserManagePage() {
     nickname: '',
   });
 
-  const passwordMatch = form.passwordConfirm && form.password === form.passwordConfirm;
+  // 'idle' | 'match' | 'mismatch'
+  const passwordMatchStatus = !form.passwordConfirm
+    ? 'idle'
+    : form.password === form.passwordConfirm
+      ? 'match'
+      : 'mismatch';
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,7 +42,7 @@ export default function UserManagePage() {
       alert('모든 필드를 입력해주세요.');
       return;
     }
-    if (form.password !== form.passwordConfirm) {
+    if (passwordMatchStatus !== 'match') {
       alert('비밀번호가 일치하지 않습니다.');
       return;
     }
@@ -55,6 +60,11 @@ export default function UserManagePage() {
           onChange={handleChange}
         />
 
+        <NicknameField
+          value={form.nickname}
+          onChange={handleChange}
+        />
+
         <PasswordField
           value={form.password}
           onChange={handleChange}
@@ -63,12 +73,7 @@ export default function UserManagePage() {
         <PasswordConfirmField
           value={form.passwordConfirm}
           onChange={handleChange}
-          passwordMatch={passwordMatch}
-        />
-
-        <NicknameField
-          value={form.nickname}
-          onChange={handleChange}
+          matchStatus={passwordMatchStatus}
         />
 
         <Button type="submit" variant="outline" className="mt-2 w-full">

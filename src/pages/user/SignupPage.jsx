@@ -25,7 +25,12 @@ export default function SignupPage() {
   // 'idle' | 'available' | 'unavailable'
   const [idCheckStatus, setIdCheckStatus] = useState('idle');
 
-  const passwordMatch = form.passwordConfirm && form.password === form.passwordConfirm;
+  // 'idle' | 'match' | 'mismatch'
+  const passwordMatchStatus = !form.passwordConfirm
+    ? 'idle'
+    : form.password === form.passwordConfirm
+      ? 'match'
+      : 'mismatch';
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,7 +57,7 @@ export default function SignupPage() {
       alert('ID 중복 확인을 해주세요.');
       return;
     }
-    if (form.password !== form.passwordConfirm) {
+    if (passwordMatchStatus !== 'match') {
       alert('비밀번호가 일치하지 않습니다.');
       return;
     }
@@ -70,6 +75,11 @@ export default function SignupPage() {
           onCheckDuplicate={handleCheckDuplicate}
         />
 
+        <NicknameField
+          value={form.nickname}
+          onChange={handleChange}
+        />
+
         <PasswordField
           value={form.password}
           onChange={handleChange}
@@ -78,12 +88,7 @@ export default function SignupPage() {
         <PasswordConfirmField
           value={form.passwordConfirm}
           onChange={handleChange}
-          passwordMatch={passwordMatch}
-        />
-
-        <NicknameField
-          value={form.nickname}
-          onChange={handleChange}
+          matchStatus={passwordMatchStatus}
         />
 
         <Button type="submit" className="mt-2 w-full">
