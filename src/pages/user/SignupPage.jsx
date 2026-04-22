@@ -21,24 +21,35 @@ export default function SignupPage() {
     passwordConfirm: '',
     nickname: '',
   });
-  const [idChecked, setIdChecked] = useState(false);
+
+  // 'idle' | 'available' | 'unavailable'
+  const [idCheckStatus, setIdCheckStatus] = useState('idle');
 
   const passwordMatch = form.passwordConfirm && form.password === form.passwordConfirm;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-    if (name === 'userId') setIdChecked(false);
+    // ID가 변경되면 확인 상태 초기화
+    if (name === 'userId') setIdCheckStatus('idle');
   };
 
-  const handleCheckDuplicate = () => {
-    if (form.userId.trim()) setIdChecked(true);
+  // TODO: API 연동 시 아래 주석을 해제하고 임시 setIdCheckStatus('available') 제거
+  const handleCheckDuplicate = async () => {
+    if (!form.userId.trim()) return;
+    // const isDuplicate = await checkUserIdApi(form.userId);
+    // setIdCheckStatus(isDuplicate ? 'unavailable' : 'available');
+    setIdCheckStatus('available');
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!form.userId || !form.password || !form.passwordConfirm || !form.nickname) {
       alert('모든 필드를 입력해주세요.');
+      return;
+    }
+    if (idCheckStatus !== 'available') {
+      alert('ID 중복 확인을 해주세요.');
       return;
     }
     if (form.password !== form.passwordConfirm) {
@@ -50,12 +61,12 @@ export default function SignupPage() {
 
   return (
     <PageLayout navItems={navItems} className="flex items-center justify-center p-12">
-      <form className="w-full max-w-sm flex flex-col gap-5" onSubmit={handleSubmit}>
+      <form className="w-full max-w-sm flex flex-col gap-6" onSubmit={handleSubmit}>
 
         <UserIdField
           value={form.userId}
           onChange={handleChange}
-          idChecked={idChecked}
+          checkStatus={idCheckStatus}
           onCheckDuplicate={handleCheckDuplicate}
         />
 
