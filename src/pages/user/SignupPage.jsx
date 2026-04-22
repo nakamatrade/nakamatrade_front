@@ -66,7 +66,7 @@ export default function SignupPage() {
 
   return (
     <PageLayout navItems={navItems} className="flex items-center justify-center p-12">
-      <form className="w-full max-w-sm flex flex-col gap-6" onSubmit={handleSubmit}>
+      <form className="w-full max-w-sm flex flex-col gap-10" onSubmit={handleSubmit}>
 
         <UserIdField
           value={form.userId}
