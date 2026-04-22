@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import PageLayout from '@/components/common/PageLayout';
-import FormField from '@/components/common/FormField';
+import UserIdReadonlyField from '@/components/user/UserIdReadonlyField';
+import EmailField from '@/components/user/EmailField';
+import PasswordField from '@/components/user/PasswordField';
+import PasswordConfirmField from '@/components/user/PasswordConfirmField';
+import NicknameField from '@/components/user/NicknameField';
 
 const navItems = [
   { label: '경매방 생성', to: '#' },
@@ -45,69 +48,28 @@ export default function UserManagePage() {
     <PageLayout navItems={navItems} className="flex items-center justify-center p-12">
       <form className="w-full max-w-sm flex flex-col gap-5" onSubmit={handleSubmit}>
 
-        {/* ID — 수정 불가 */}
-        <FormField label="ID" id="userId">
-          <Input
-            type="text"
-            id="userId"
-            name="userId"
-            value={form.userId}
-            disabled
-            className="bg-muted text-muted-foreground cursor-not-allowed"
-          />
-        </FormField>
+        <UserIdReadonlyField value={form.userId} />
 
-        {/* 이메일 */}
-        <FormField label="이메일" id="email">
-          <Input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="이메일 입력"
-            value={form.email}
-            onChange={handleChange}
-          />
-        </FormField>
+        <EmailField
+          value={form.email}
+          onChange={handleChange}
+        />
 
-        {/* 비밀번호 */}
-        <FormField label="비밀번호" id="password">
-          <Input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="비밀번호 입력"
-            value={form.password}
-            onChange={handleChange}
-          />
-        </FormField>
+        <PasswordField
+          value={form.password}
+          onChange={handleChange}
+        />
 
-        {/* 비밀번호 확인 */}
-        <FormField
-          label="비밀번호 확인"
-          id="passwordConfirm"
-          successMessage={passwordMatch ? 'Password 일치' : null}
-        >
-          <Input
-            type="password"
-            id="passwordConfirm"
-            name="passwordConfirm"
-            placeholder="비밀번호 재입력"
-            value={form.passwordConfirm}
-            onChange={handleChange}
-          />
-        </FormField>
+        <PasswordConfirmField
+          value={form.passwordConfirm}
+          onChange={handleChange}
+          passwordMatch={passwordMatch}
+        />
 
-        {/* 닉네임 */}
-        <FormField label="닉네임" id="nickname">
-          <Input
-            type="text"
-            id="nickname"
-            name="nickname"
-            placeholder="닉네임 입력"
-            value={form.nickname}
-            onChange={handleChange}
-          />
-        </FormField>
+        <NicknameField
+          value={form.nickname}
+          onChange={handleChange}
+        />
 
         <Button type="submit" variant="outline" className="mt-2 w-full">
           저장
