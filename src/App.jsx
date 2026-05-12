@@ -4,6 +4,12 @@ import SignupPage from './pages/user/SignupPage';
 import UserManagePage from './pages/user/UserManagePage';
 import NoticePage from './pages/notice/NoticePage';
 import ProductManagePage from './pages/product/ProductManagePage';
+import AuctionRoomListPage from './pages/auction/AuctionRoomListPage';
+import PlayerLoadPage from './pages/auction/PlayerLoadPage';
+import PlayerEditPage from './pages/auction/PlayerEditPage';
+import PlayerWaitPage from './pages/auction/PlayerWaitPage';
+import RandomOrderPage from './pages/auction/RandomOrderPage';
+import PlayerBidPage from './pages/auction/PlayerBidPage';
 
 export default function App() {
   return (
@@ -13,6 +19,12 @@ export default function App() {
       <Route path="/user-manage" element={<UserManagePage />} />
       <Route path="/notice" element={<NoticePage />} />
       <Route path="/product-manage" element={<ProductManagePage />} />
+      <Route path="/auction/rooms" element={<AuctionRoomListPage />} />
+      <Route path="/auction/load-players" element={<PlayerLoadPage />} />
+      <Route path="/auction/edit-players" element={<PlayerEditPage />} />
+      <Route path="/auction/waiting" element={<PlayerWaitPage />} />
+      <Route path="/auction/order" element={<RandomOrderPage />} />
+      <Route path="/auction/bid" element={<PlayerBidPage />} />
     </Routes>
   );
 }

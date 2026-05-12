@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils';
  *   onViewChange: (view: 'card' | 'list') => void,
  * }} props
  */
-export default function ProductToolbar({ search, onSearchChange, view, onViewChange }) {
+export default function ProductToolbar({ search, onSearchChange, view, onViewChange, onRegister }) {
   return (
     <div className="flex items-center gap-3 mb-4 flex-wrap">
       {/* 세트 선택 */}
@@ -68,7 +68,7 @@ export default function ProductToolbar({ search, onSearchChange, view, onViewCha
         </button>
       </div>
 
-      <Button variant="outline" className="h-10 gap-1 ml-auto">
+      <Button variant="outline" className="h-10 gap-1 ml-auto" onClick={onRegister}>
         <Plus className="w-4 h-4" />
         플레이어 등록
       </Button>

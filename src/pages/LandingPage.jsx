@@ -5,7 +5,7 @@ import LandingVisual from '@/components/landing/LandingVisual';
 import SocialLoginSection from '@/components/landing/SocialLoginSection';
 
 const navItems = [
-  { label: '트레이드 시작', to: '/', active: true },
+  { label: '트레이드 시작', to: '/auction/load-players' },
   { label: '이용 가이드', to: '#' },
   { label: '공지사항', to: '/notice' },
 ];
