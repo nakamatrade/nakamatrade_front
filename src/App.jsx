@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import DevQuickNav from './components/common/DevQuickNav';
 import LandingPage from './pages/LandingPage';
 import SignupPage from './pages/user/SignupPage';
 import UserManagePage from './pages/user/UserManagePage';
@@ -15,6 +16,7 @@ import PlayerBidPage from './pages/auction/PlayerBidPage';
 
 export default function App() {
   return (
+    <>
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/signup" element={<SignupPage />} />
@@ -30,5 +32,7 @@ export default function App() {
       <Route path="/auction/order" element={<RandomOrderPage />} />
       <Route path="/auction/bid" element={<PlayerBidPage />} />
     </Routes>
+    <DevQuickNav />
+    </>
   );
 }
