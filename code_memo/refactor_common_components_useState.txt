@@ -1,0 +1,97 @@
+================================================================================
+ NakamaTrade 리팩토링 메모
+ 날짜: 2026-04-19
+================================================================================
+
+[ 목적 ]
+- 반복되던 UI 패턴을 공통 컴포넌트로 분리
+- 각 페이지에서 공통 컴포넌트를 import해서 사용하는 구조로 전환
+- useState 활용도 향상 (검색 상태, 선택 상태 등)
+
+--------------------------------------------------------------------------------
+1. 신규 파일 — src/components/common/
+--------------------------------------------------------------------------------
+
+▸ PageLayout.jsx
+  - Header + Sidebar를 포함한 표준 페이지 레이아웃 래퍼
+  - props: navItems, activeItem(기본값 'Home'), className, children
+  - 사용 페이지: SignupPage, UserManagePage, ProductManagePage
+
+▸ FormField.jsx
+  - Label + 입력 영역(children) + 성공 메시지를 묶는 폼 필드 래퍼
+  - props: label, id, successMessage(falsy면 숨김), children
+  - children으로 Input 또는 커스텀 요소(버튼 포함 flex 등)를 자유롭게 넣을 수 있음
+  - 사용 페이지: SignupPage, UserManagePage
+
+▸ PlayerCard.jsx
+  - 매물 관리 카드 뷰 아이템 (체크박스, 아바타, 닉네임/소개, 팀 배지, 더보기 버튼)
+  - props: item { id, nickname, desc, teams }, selected, onToggle, onMoreClick
+  - 기존 ProductManagePage 내부 함수에서 독립 컴포넌트로 분리
+
+▸ PlayerRow.jsx
+  - 매물 관리 리스트 뷰 아이템 (체크박스, 아바타, 닉네임/소개, 팀 배지, 더보기 버튼)
+  - props: item, selected, onToggle, onMoreClick
+  - 기존 ProductManagePage 내부 함수에서 독립 컴포넌트로 분리
+
+▸ SocialButton.jsx
+  - 소셜 로그인 버튼 (Google / Kakao / Naver / Discord)
+  - props: label(aria-label), className, svg, onClick
+  - 기존 LandingPage 내부 SocialBtn 함수에서 독립 컴포넌트로 분리
+
+--------------------------------------------------------------------------------
+2. 수정 파일 — src/pages/
+--------------------------------------------------------------------------------
+
+▸ LandingPage.jsx
+  - 내부 SocialBtn 함수 제거 → SocialButton(common) import로 대체
+
+▸ SignupPage.jsx
+  - Header + Sidebar 중복 코드 제거 → PageLayout(common) 사용
+  - form-field div 반복 제거 → FormField(common) 사용
+  - 기존 useState 구조 유지 (form, idChecked)
+
+▸ UserManagePage.jsx
+  - Header + Sidebar 중복 코드 제거 → PageLayout(common) 사용
+  - form-field div 반복 제거 → FormField(common) 사용
+  - 기존 useState 구조 유지 (form)
+
+▸ NoticePage.jsx
+  - [useState 추가] search: 공지사항 제목 텍스트 필터링
+  - [useState 추가] selectedId: 클릭한 공지 항목 선택 상태 → 하단에 상세 영역 표시
+  - 검색 Input 컴포넌트 추가 (Search 아이콘 포함)
+  - 검색 결과 없을 때 안내 문구 표시
+
+▸ ProductManagePage.jsx
+  - Header + Sidebar 중복 코드 제거 → PageLayout(common) 사용
+  - PlayerCard, PlayerRow 내부 함수 제거 → 각 공통 컴포넌트 import로 대체
+  - [useState 추가] search: 플레이어 닉네임/소개 텍스트 필터링
+  - 게임 탭 전환 시 선택 상태(selected) 초기화 처리 추가
+  - 전체 선택 체크박스를 filtered 기준으로 계산하도록 수정
+  - 검색 결과 없을 때 안내 문구 표시
+
+--------------------------------------------------------------------------------
+3. useState 사용 현황 정리
+--------------------------------------------------------------------------------
+
+  페이지                | state 변수          | 용도
+  --------------------|--------------------|---------------------------------
+  SignupPage          | form               | 입력 폼 전체 필드 값
+                      | idChecked          | ID 중복 확인 완료 여부
+  UserManagePage      | form               | 입력 폼 전체 필드 값
+  NoticePage          | search             | 공지 검색어 (NEW)
+                      | selectedId         | 선택된 공지 항목 ID (NEW)
+  ProductManagePage   | view               | 카드/리스트 뷰 토글
+                      | activeGame         | 선택된 게임 탭
+                      | selected (Set)     | 선택된 플레이어 ID 집합
+                      | search             | 플레이어 검색어 (NEW)
+
+--------------------------------------------------------------------------------
+4. 앞으로 고려할 사항 (메모)
+--------------------------------------------------------------------------------
+
+- 실제 데이터 연동 시 sampleItems / allNotices → API fetch로 교체 필요
+- 소셜 로그인 onClick 핸들러 연결 필요 (현재 미구현)
+- PlayerCard/PlayerRow의 더보기(onMoreClick) 드롭다운 메뉴 구현 필요
+- 페이지네이션 또는 무한스크롤 추가 고려 (공지, 매물 목록)
+
+================================================================================
